@@ -1,0 +1,874 @@
+/* ============================================================
+   style.css — Market Risk Statistical Validation Dashboard
+   Design system:
+   Warm ivory background + near-white analytical surfaces
+   + espresso typography + restrained bronze accent.
+   
+   Red / green are reserved for genuine risk-status signals.
+
+   Type pairing: a serif display face for headings (research-report
+   register, not a generic dashboard font) with a humanist sans for body
+   copy and data, so headings read as authored analysis while numbers stay
+   maximally legible in tables and metrics.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;650;700&display=swap');
+
+:root {
+    --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+
+/* ============================================================
+   NARRATIVE CHAPTER HEADER
+   ============================================================ */
+
+.chapter-kicker {
+    color: var(--accent) !important;
+    font-family: var(--font-body);
+    font-size: 0.76rem;
+    font-weight: 650;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+}
+
+.chapter-title {
+    font-family: var(--font-display) !important;
+    font-size: 2.0rem !important;
+    font-weight: 650 !important;
+    letter-spacing: -0.008em;
+    line-height: 1.18;
+    margin-top: 0 !important;
+    margin-bottom: 0.35rem !important;
+}
+
+.chapter-hook {
+    color: var(--muted) !important;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 68ch;
+    margin-bottom: 0.4rem;
+}
+
+div[data-testid="stProgress"] > div > div {
+    background-color: var(--accent) !important;
+}
+
+div[data-testid="stProgress"] {
+    height: 5px;
+}
+
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+    /* Typography */
+    --ink: #2b211b;
+    --ink-soft: #493a30;
+    --muted: #786b61;
+    --muted-light: #9a8c80;
+
+    /* Surfaces */
+    --bg: #f5f1ec;
+    --bg-card: #fffdf9;
+    --bg-sidebar: #eee7df;
+    --bg-soft: #f1ebe5;
+    --bg-hover: #f7f1eb;
+
+    /* Borders */
+    --line: #ded5cc;
+    --line-soft: #e8e0d8;
+    --line-dark: #cfc4b9;
+
+    /* Accent */
+    --accent: #6f4e37;
+    --accent-dark: #513724;
+    --accent-soft: #f1e8df;
+    --accent-lighter: #f7f0e9;
+
+    /* Semantic status */
+    --good: #496b52;
+    --good-bg: #e8f0e8;
+
+    --bad: #9a4a3f;
+    --bad-bg: #f5e5e2;
+
+    --warning: #8a6435;
+    --warning-bg: #f5ecdf;
+
+    /* Misc */
+    --white: #ffffff;
+    --shadow-soft: 0 2px 8px rgba(75, 55, 40, 0.04);
+    --shadow-card: 0 4px 14px rgba(75, 55, 40, 0.045);
+}
+
+
+/* ============================================================
+   MAIN APPLICATION
+   ============================================================ */
+
+.stApp {
+    background-color: var(--bg) !important;
+    color: var(--ink) !important;
+    font-family: var(--font-body);
+}
+
+.main {
+    background-color: var(--bg) !important;
+}
+
+.block-container {
+    padding-top: 2rem !important;
+    padding-bottom: 3rem !important;
+    max-width: 1200px;
+}
+
+/* Subtle top accent bar — a quiet signature rather than a loud banner. */
+.stApp::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 55%, var(--accent) 100%);
+    z-index: 1000;
+}
+
+
+/* ============================================================
+   GLOBAL TEXT
+   ============================================================ */
+
+.stApp,
+.stApp p,
+.stApp span,
+.stApp label,
+.stApp div {
+    color: var(--ink);
+}
+
+
+/* Headings */
+
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4,
+.stApp h5,
+.stApp h6 {
+    color: var(--ink) !important;
+    font-family: var(--font-display);
+    font-weight: 600;
+}
+
+.stApp h1 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-size: 2.35rem !important;
+    line-height: 1.15;
+}
+
+.stApp h2 {
+    letter-spacing: -0.006em;
+}
+
+.stApp h3 {
+    letter-spacing: -0.004em;
+}
+
+
+/* Kicker — a small uppercase eyebrow line above the title, giving the page
+   a research-report opening rather than a dashboard header. Applied via a
+   <p class="app-kicker"> placed immediately before the st.title() call. */
+
+.app-kicker {
+    color: var(--accent) !important;
+    font-family: var(--font-body);
+    font-size: 0.76rem;
+    font-weight: 650;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+
+/* Subtitle */
+
+.app-subtitle {
+    color: var(--muted) !important;
+    font-family: var(--font-body);
+    font-size: 1.0rem;
+    line-height: 1.55;
+    margin-top: -0.3rem;
+    margin-bottom: 1.6rem;
+    max-width: 62ch;
+}
+
+
+/* Small explanatory text */
+
+.stCaption,
+[data-testid="stCaptionContainer"] {
+    color: var(--muted) !important;
+}
+
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+section[data-testid="stSidebar"] {
+    background-color: var(--bg-sidebar) !important;
+    border-right: 1px solid var(--line) !important;
+}
+
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] * {
+    color: var(--ink) !important;
+}
+
+section[data-testid="stSidebar"] h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted) !important;
+    font-weight: 700;
+}
+
+section[data-testid="stSidebar"] h3 {
+    color: var(--ink) !important;
+}
+
+section[data-testid="stSidebar"] label {
+    color: var(--ink-soft) !important;
+}
+
+section[data-testid="stSidebar"] p {
+    color: var(--muted) !important;
+}
+
+
+/* ============================================================
+   TEXT INPUTS / DATE INPUTS / NUMBER INPUTS
+   ============================================================ */
+
+.stTextInput input,
+.stDateInput input,
+.stNumberInput input {
+    background-color: var(--bg-card) !important;
+    color: var(--ink) !important;
+
+    border: 1px solid var(--line-dark) !important;
+    border-radius: 7px !important;
+
+    box-shadow: none !important;
+}
+
+.stTextInput input::placeholder,
+.stDateInput input::placeholder,
+.stNumberInput input::placeholder {
+    color: var(--muted-light) !important;
+}
+
+.stTextInput input:focus,
+.stDateInput input:focus,
+.stNumberInput input:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 1px var(--accent) !important;
+}
+
+
+/* ============================================================
+   SELECTBOX / MULTISELECT
+   ============================================================ */
+
+div[data-baseweb="select"] > div {
+    background-color: var(--bg-card) !important;
+    border-color: var(--line-dark) !important;
+    border-radius: 7px !important;
+}
+
+div[data-baseweb="select"] span {
+    color: var(--ink) !important;
+}
+
+div[role="listbox"] {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--line) !important;
+}
+
+div[role="option"] {
+    color: var(--ink) !important;
+}
+
+div[role="option"]:hover {
+    background-color: var(--accent-soft) !important;
+}
+
+
+/* ============================================================
+   SLIDERS
+   ============================================================ */
+
+.stSlider label {
+    color: var(--ink-soft) !important;
+}
+
+.stSlider [data-testid="stMarkdownContainer"] p {
+    color: var(--accent) !important;
+}
+
+.stSlider [role="slider"] {
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+
+
+/* ============================================================
+   SIDEBAR STORY NAVIGATION (radio list)
+   ============================================================ */
+
+section[data-testid="stSidebar"] div[role="radiogroup"] {
+    gap: 0.15rem;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label {
+    padding: 0.4rem 0.55rem;
+    border-radius: 7px;
+    transition: background-color 0.15s ease;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+section[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"],
+section[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) {
+    background-color: var(--accent-soft) !important;
+    font-weight: 650;
+}
+
+
+/* ============================================================
+   CHECKBOXES
+   ============================================================ */
+
+.stCheckbox label {
+    color: var(--ink) !important;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.stButton button {
+    background-color: var(--accent) !important;
+    color: var(--white) !important;
+
+    border: 1px solid var(--accent) !important;
+    border-radius: 7px !important;
+
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.05s ease;
+}
+
+.stButton button:hover {
+    background-color: var(--accent-dark) !important;
+    border-color: var(--accent-dark) !important;
+    color: var(--white) !important;
+}
+
+.stButton button:active {
+    transform: translateY(1px);
+}
+
+
+/* ============================================================
+   SECTION NOTES / INFO BOXES
+   ============================================================ */
+
+.section-note {
+    background-color: var(--accent-soft) !important;
+    border-left: 3px solid var(--accent);
+
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+
+    font-size: 0.92rem;
+    line-height: 1.55;
+
+    color: var(--ink) !important;
+
+    margin-bottom: 1.15rem;
+
+    box-shadow: var(--shadow-soft);
+}
+
+.section-note * {
+    color: var(--ink) !important;
+}
+
+
+/* Streamlit alert/info */
+
+div[data-testid="stAlert"] {
+    background-color: var(--accent-soft) !important;
+    border: 1px solid #ddcfc2 !important;
+    border-radius: 8px !important;
+
+    box-shadow: none !important;
+}
+
+div[data-testid="stAlert"] * {
+    color: var(--ink-soft) !important;
+}
+
+
+/* ============================================================
+   METRIC CARDS
+   ============================================================ */
+
+div[data-testid="stMetric"] {
+    background-color: var(--bg-card) !important;
+
+    border: 1px solid var(--line) !important;
+    border-radius: 10px !important;
+
+    padding: 0.9rem 1rem;
+
+    box-shadow: var(--shadow-soft);
+
+    min-height: 92px;
+
+    transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+div[data-testid="stMetric"]:hover {
+    box-shadow: var(--shadow-card);
+    border-color: var(--line-dark) !important;
+    transform: translateY(-1px);
+}
+
+div[data-testid="stMetricLabel"],
+div[data-testid="stMetricLabel"] * {
+    color: var(--muted) !important;
+    font-size: 0.80rem;
+    font-weight: 500;
+}
+
+div[data-testid="stMetricValue"],
+div[data-testid="stMetricValue"] * {
+    color: var(--ink) !important;
+    font-size: 1.38rem;
+    font-weight: 650;
+}
+
+div[data-testid="stMetricDelta"] {
+    color: var(--muted) !important;
+}
+
+
+/* ============================================================
+   VERDICT PILLS
+   ============================================================ */
+
+.verdict {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+
+    padding: 0.2rem 0.68rem 0.2rem 0.56rem;
+
+    border-radius: 999px;
+
+    font-size: 0.82rem;
+    font-weight: 650;
+
+    line-height: 1.4;
+
+    box-shadow: 0 1px 2px rgba(75, 55, 40, 0.05);
+}
+
+.verdict::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.verdict.pass {
+    background-color: var(--good-bg) !important;
+    color: var(--good) !important;
+}
+
+.verdict.fail {
+    background-color: var(--bad-bg) !important;
+    color: var(--bad) !important;
+}
+
+.verdict.warning {
+    background-color: var(--warning-bg) !important;
+    color: var(--warning) !important;
+}
+
+
+/* ============================================================
+   TABS
+   ============================================================ */
+
+div[data-baseweb="tab-list"] {
+    gap: 0.15rem;
+    border-bottom: 1px solid var(--line);
+}
+
+button[data-baseweb="tab"] {
+    font-size: 0.90rem;
+    font-weight: 550;
+
+    color: var(--muted) !important;
+
+    padding: 0.65rem 0.85rem;
+
+    transition:
+        color 0.15s ease,
+        background-color 0.15s ease;
+}
+
+button[data-baseweb="tab"]:hover {
+    color: var(--accent) !important;
+    background-color: var(--accent-lighter) !important;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: var(--accent) !important;
+    font-weight: 650;
+    background-color: var(--accent-lighter) !important;
+    border-radius: 7px 7px 0 0;
+}
+
+div[data-baseweb="tab-highlight"] {
+    background-color: var(--accent) !important;
+    height: 2px !important;
+    transition: left 0.2s ease, width 0.2s ease;
+}
+
+/* Buttons: a touch more depth on hover, consistent with the metric cards. */
+
+.stButton button {
+    box-shadow: 0 1px 3px rgba(75, 55, 40, 0.10);
+}
+
+.stButton button:hover {
+    box-shadow: 0 3px 8px rgba(75, 55, 40, 0.16);
+    transform: translateY(-1px);
+}
+
+/* The sidebar's primary button is the single most important click in the
+   whole app (Run analysis) -- give it real visual weight rather than
+   blending in with the rest of the sidebar chrome. */
+
+section[data-testid="stSidebar"] button[kind="primary"],
+section[data-testid="stSidebar"] .stButton button[kind="primary"] {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    padding: 0.7rem 1rem !important;
+    letter-spacing: 0.01em;
+    box-shadow: 0 2px 10px rgba(111, 78, 55, 0.35) !important;
+    animation: cta-pulse 2.2s ease-in-out 3;
+}
+
+section[data-testid="stSidebar"] button[kind="primary"]:hover {
+    box-shadow: 0 4px 14px rgba(111, 78, 55, 0.45) !important;
+}
+
+@keyframes cta-pulse {
+    0%, 100% { box-shadow: 0 2px 10px rgba(111, 78, 55, 0.35); }
+    50% { box-shadow: 0 2px 18px rgba(111, 78, 55, 0.65); }
+}
+
+/* Text selection tinted to the accent rather than the browser default blue. */
+
+::selection {
+    background-color: var(--accent-soft);
+    color: var(--accent-dark);
+}
+
+
+/* ============================================================
+   DATAFRAMES — LIGHT ANALYTICAL TABLE
+   ============================================================ */
+
+div[data-testid="stDataFrame"] {
+    background: var(--bg-card) !important;
+
+    border: 1px solid var(--line) !important;
+    border-radius: 10px !important;
+
+    overflow: hidden !important;
+
+    box-shadow: var(--shadow-soft);
+}
+
+div[data-testid="stDataFrame"] > div {
+    background: var(--bg-card) !important;
+}
+
+
+/* Dataframe toolbar / top controls */
+
+div[data-testid="stDataFrame"] button {
+    color: var(--ink-soft) !important;
+}
+
+
+/* Dataframe scrollbars */
+
+div[data-testid="stDataFrame"] ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+div[data-testid="stDataFrame"] ::-webkit-scrollbar-track {
+    background: #f1ece7;
+}
+
+div[data-testid="stDataFrame"] ::-webkit-scrollbar-thumb {
+    background: #c9beb3;
+    border-radius: 8px;
+}
+
+div[data-testid="stDataFrame"] ::-webkit-scrollbar-thumb:hover {
+    background: #a99687;
+}
+
+
+/* ============================================================
+   TABLE-LIKE MARKDOWN ELEMENTS
+   ============================================================ */
+
+.stMarkdown table {
+    width: 100%;
+    border-collapse: collapse;
+
+    background-color: var(--bg-card);
+
+    border: 1px solid var(--line);
+
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.stMarkdown thead tr {
+    background-color: #f1ebe5;
+}
+
+.stMarkdown th {
+    color: var(--ink-soft) !important;
+
+    font-size: 0.82rem;
+    font-weight: 650;
+
+    text-align: left;
+
+    padding: 0.65rem 0.75rem;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.stMarkdown td {
+    color: var(--ink) !important;
+
+    font-size: 0.82rem;
+
+    padding: 0.58rem 0.75rem;
+
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.stMarkdown tbody tr:hover {
+    background-color: var(--bg-hover);
+}
+
+
+/* ============================================================
+   DIVIDERS
+   ============================================================ */
+
+hr {
+    border-color: var(--line) !important;
+}
+
+
+/* ============================================================
+   CHART / FIGURE CONTAINERS
+   ============================================================ */
+
+/*
+   These styles create a clean card surface around charts.
+   Actual plot styling is controlled in Matplotlib inside app.py.
+*/
+
+div[data-testid="stImage"],
+div[data-testid="stPlotlyChart"],
+div[data-testid="stPyplotChart"] {
+    background-color: var(--bg-card) !important;
+
+    border: 1px solid var(--line-soft) !important;
+    border-radius: 10px !important;
+
+    box-shadow: var(--shadow-soft);
+
+    padding: 0.15rem;
+}
+
+
+/* ============================================================
+   PLOTLY CHARTS
+   ============================================================ */
+
+.js-plotly-plot .plotly {
+    background-color: var(--bg-card) !important;
+}
+
+
+/* ============================================================
+   EXPANDERS
+   ============================================================ */
+
+div[data-testid="stExpander"] {
+    background-color: var(--bg-card) !important;
+
+    border: 1px solid var(--line) !important;
+    border-radius: 9px !important;
+
+    box-shadow: var(--shadow-soft);
+}
+
+div[data-testid="stExpander"] summary {
+    color: var(--ink-soft) !important;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   TOOLTIPS / POPOVERS
+   ============================================================ */
+
+div[data-baseweb="popover"] {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--line) !important;
+}
+
+
+/* ============================================================
+   FORM / CONTAINER SURFACES
+   ============================================================ */
+
+div[data-testid="stForm"] {
+    background-color: var(--bg-card) !important;
+
+    border: 1px solid var(--line) !important;
+    border-radius: 9px !important;
+
+    padding: 0.8rem;
+
+    box-shadow: var(--shadow-soft);
+}
+
+
+/* ============================================================
+   LINKS
+   ============================================================ */
+
+.stApp a {
+    color: var(--accent) !important;
+    text-decoration: none;
+}
+
+.stApp a:hover {
+    color: var(--accent-dark) !important;
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   STATUS / SUCCESS / WARNING / ERROR
+   ============================================================ */
+
+div[data-testid="stNotification"] {
+    border-radius: 8px !important;
+}
+
+
+/* ============================================================
+   STREAMLIT CHROME
+   ============================================================ */
+
+/* Hide top Streamlit header */
+[data-testid="stHeader"] {
+    display: none !important;
+}
+
+/* Hide Streamlit menu */
+#MainMenu {
+    visibility: hidden;
+}
+
+/* Hide Streamlit footer */
+footer {
+    visibility: hidden;
+}
+
+
+/* Remove leftover top spacing */
+
+.stAppViewContainer {
+    margin-top: 0 !important;
+}
+
+.main .block-container {
+    padding-top: 2rem !important;
+}
+
+
+/* ============================================================
+   RESPONSIVE SPACING
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    .block-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .app-subtitle {
+        font-size: 0.90rem;
+    }
+
+    button[data-baseweb="tab"] {
+        font-size: 0.82rem;
+        padding-left: 0.55rem;
+        padding-right: 0.55rem;
+    }
+
+    div[data-testid="stMetricValue"],
+    div[data-testid="stMetricValue"] * {
+        font-size: 1.2rem;
+    }
+}
